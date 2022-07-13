@@ -9,12 +9,6 @@ export default function Appointment(props) {
   // console.log(props)
 const { time, interview } = props;
 
-// console.log("This is the time:", time)
-// console.log("This is the interview prop:", interview)
-// console.log("This is the student prop:", interview.student)
-// console.log("This is the interviewer prop:", interview.interviewer)
-
-
   return (
     <article className="appointment">
       <Header time={time}/>
