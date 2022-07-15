@@ -5,7 +5,7 @@ import axios from "axios";
 import "components/Application.scss";
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
-import { getAppointmentsForDay } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview} from "helpers/selectors";
 
 /* 
 const appointments = {
@@ -76,7 +76,7 @@ export default function Application(props) {
     })
   }, []);
 
-  // console.log(state.interviewers)
+  console.log(state.interviewers)
 
   const dailyAppointments = getAppointmentsForDay(state, state.day)
 
@@ -89,8 +89,13 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
       />
+      
     );
+    
   });
+  // console.log("this is daily appointments:", dailyAppointments)
+  // console.log("this is schedule", schedule)
+  
 
   return (
     <main className="layout">
@@ -115,7 +120,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {/* {appointment} */}
+        {schedule}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
