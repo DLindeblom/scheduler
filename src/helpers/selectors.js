@@ -39,7 +39,6 @@ export function getInterviewersForDay(state, day) {
     return state.interviewers[interviewer]
   })
 
-  console.log(interviewerList)
   return interviewerList;
 
 }

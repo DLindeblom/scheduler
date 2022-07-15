@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { useState } from "react";
 
 // custom hook to move around views
 export default function useVisualMode(initial) {
