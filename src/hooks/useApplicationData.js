@@ -55,6 +55,10 @@ export default function useApplicationData() {
       
   }
 
+  function updateSpotsRemaining(id) {
+
+  }
+
 
 
   return { state, setDay, bookInterview, cancelInterview };
