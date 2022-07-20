@@ -7,20 +7,37 @@ export default function Form(props) {
 
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [error, setError] = useState("");
 
   // resets form data
   const reset = () => {
-    return setStudent(""),
-      setInterviewer(null);
+    setStudent("");
+    setInterviewer(null);
+    setError("");
   };
 
   // handles functionality when cancel button is pressed
   const cancel = () => {
-    return onCancel(), reset();
+    reset();
+    onCancel();
+    
   };
 
-  const save = () => {
-    return onSave(student, interviewer);
+
+  const validate = () => {
+
+    if (student === '') {
+      setError("Student name cannot be blank");
+      return;
+    }
+
+    if (interviewer === null) {
+      setError("Please select an interviewer");
+      return;
+    }
+
+    setError("")
+    onSave(student, interviewer);
   };
 
   return (
@@ -28,6 +45,7 @@ export default function Form(props) {
       <section className="appointment__card-left">
         <form onSubmit={event => { event.preventDefault(); }} autoComplete="off">
           <input
+            data-testid="student-name-input"
             className="appointment__create-input text--semi-bold"
             value={student}
             type="text"
@@ -35,6 +53,7 @@ export default function Form(props) {
             onChange={(event) => setStudent(event.target.value)}
           />
         </form>
+        <section className="appointment__validation">{error}</section>
         <InterviewerList
           interviewers={interviewers}
           value={interviewer}
@@ -44,7 +63,7 @@ export default function Form(props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={save}>Save</Button>
+          <Button confirm onClick={() => validate()}>Save</Button>
         </section>
       </section>
     </main>
