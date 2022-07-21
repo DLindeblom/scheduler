@@ -1,5 +1,3 @@
-
-
 describe("Appointments", () => {
 
   beforeEach(() => {
