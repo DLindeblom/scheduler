@@ -23,7 +23,7 @@ npm test
 ```sh
 npm run storybook
 ```
-Here are a few screenshots of the project:
+Here are a few screenshots of the project:\n
 The app showing two booked appointments and open spots to add more appointments.
 ![](https://github.com/DLindeblom/scheduler/blob/master/docs/booked-appointments.png?raw=true)
 The app showing how the interview submission form looks.
