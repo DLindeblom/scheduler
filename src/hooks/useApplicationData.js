@@ -53,11 +53,9 @@ export default function useApplicationData() {
 
     return axios.put(`/api/appointments/${id}`, appointment)
 
-      .then((res) => {
-        if (res.status === 204) {
-          const days = updateSpots(state, appointments);
-          setState({ ...state, appointments, days });
-        }
+      .then(() => {
+        const days = updateSpots(state, appointments);
+        setState({ ...state, appointments, days });
       });
   }
 
@@ -75,11 +73,9 @@ export default function useApplicationData() {
 
     return axios.delete(`/api/appointments/${id}`, appointment)
 
-      .then((res) => {
-        if (res.status === 204) {
-          const days = updateSpots(state, appointments);
-          setState({ ...state, appointments, days });
-        }
+      .then(() => {
+        const days = updateSpots(state, appointments);
+        setState({ ...state, appointments, days });
       });
   }
 
