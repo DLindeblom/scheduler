@@ -1,5 +1,7 @@
 # Interview Scheduler
 
+Thank you for taking the time to checkout this really great project! The front end was developed using React, by way of the Create React App package. Follow the steps below to install the project and test it out!
+
 ## Setup
 
 Install dependencies with `npm install`.
