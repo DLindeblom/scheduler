@@ -24,4 +24,6 @@ npm test
 npm run storybook
 ```
 Here are a few screenshots of the project:
-https://github.com/DLindeblom/scheduler/blob/master/docs/booked-appointments.png?raw=true
+![](https://github.com/DLindeblom/scheduler/blob/master/docs/booked-appointments.png?raw=true)
+![](https://github.com/DLindeblom/scheduler/blob/master/docs/booking-form.png?raw=true)
+![]()
