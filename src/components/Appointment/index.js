@@ -28,7 +28,7 @@ export default function Appointment(props) {
   );
   
   function save(name, interviewer) {
-    // if (!name || !interviewer) return;
+    
     transition(SAVING)
 
     const interview = {
@@ -41,16 +41,15 @@ export default function Appointment(props) {
         transition(SHOW);
       })
       .catch(() => transition(ERROR_SAVE))
-    
   }
 
   function confirm() {
 
     transition(CONFIRM);
-
   }
 
   function edit() {
+
     transition(EDIT)
   }
 
@@ -63,7 +62,6 @@ export default function Appointment(props) {
         transition(EMPTY)
       })
       .catch(() => transition(ERROR_DELETE, true))
-    
   }
 
   return (

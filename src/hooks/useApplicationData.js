@@ -11,36 +11,36 @@ export default function useApplicationData() {
 
   const setDay = day => setState({ ...state, day });
 
+  // call to api using a hook
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),
       axios.get('/api/appointments'),
       axios.get('/api/interviewers')
     ]).then((all) => {
-      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}))
-    })
+      setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
+    });
   }, []);
-  
-  const updateSpots = (state) => {
-    // console.log(state.days)
+
+  // render to the page an updated spot availabilty on booking or deleting an interview
+  const updateSpots = (state, appointments) => {
+
+    const currentDay = state.days.find((day) => day.name === state.day);
+    const apptID = currentDay.appointments;
+
+    const spots = apptID.filter((id) => !appointments[id].interview).length;
     const currentDayIndex = state.days.findIndex((day) => day.name === state.day);
-    const currentDay = state.days[currentDayIndex];
-    // console.log(currentDayIndex)
-    const spots = currentDay.appointments.filter((id) => !state.appointments[id].interview).length;
-    // console.log(spots)
     const updatedDayObj = { ...currentDay, spots };
-  
+
     const updatedDaysArr = [...state.days];
     updatedDaysArr[currentDayIndex] = updatedDayObj;
-  
-    // const updatedState = { ...state, days: updatedDaysArr };
-    
+
     return updatedDaysArr;
   };
 
 
   function bookInterview(id, interview) {
-    // console.log(id, interview);
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -52,31 +52,36 @@ export default function useApplicationData() {
     };
 
     return axios.put(`/api/appointments/${id}`, appointment)
-      
-      .then(res => res.status === 204 && setState({...state, appointments}))
-      .then(() => setState((prev) => ({...prev, days: updateSpots(prev)})))
-      
+
+      .then((res) => {
+        if (res.status === 204) {
+          const days = updateSpots(state, appointments);
+          setState({ ...state, appointments, days });
+        }
+      });
   }
 
   function cancelInterview(id) {
-    // console.log(id, interview)
+
     const appointment = {
       ...state.appointments[id],
       interview: null
-    }
+    };
 
     const appointments = {
       ...state.appointments,
       [id]: appointment
-    }
+    };
 
     return axios.delete(`/api/appointments/${id}`, appointment)
-      .then(res => res.status === 204 && setState({...state, appointments}))
-      .then(() => setState((prev) => ({...prev, days: updateSpots(prev)})))
-      
-  }
-  //  console.log("This is State.days:", state.days)
 
+      .then((res) => {
+        if (res.status === 204) {
+          const days = updateSpots(state, appointments);
+          setState({ ...state, appointments, days });
+        }
+      });
+  }
 
   return { state, setDay, bookInterview, cancelInterview };
 } 

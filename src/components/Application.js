@@ -8,7 +8,7 @@ import Appointment from "components/Appointment";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay} from "helpers/selectors";
 
 export default function Application(props) {
-
+  // Custom hook to move functionality out of file
   const {
     state,
     setDay,
@@ -16,10 +16,10 @@ export default function Application(props) {
     cancelInterview
   } = useApplicationData();
 
-    
+  // call to selector for array of interviewers for specified day
   const interviewers = getInterviewersForDay(state, state.day)
  
-
+  // call to selector for array of appointments on each day
   const appointments = getAppointmentsForDay(state, state.day).map(
     (appointment) => {
     return (

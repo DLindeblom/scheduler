@@ -16,9 +16,7 @@ export function getAppointmentsForDay(state, day) {
     return state.appointments[appointment];
   });
 
-
   return appointmentList;
-
 }
 
 export function getInterviewersForDay(state, day) {
@@ -40,10 +38,7 @@ export function getInterviewersForDay(state, day) {
   })
 
   return interviewerList;
-
 }
-
-
 
 export function getInterview(state, interview) {
 
@@ -58,5 +53,4 @@ export function getInterview(state, interview) {
   const interviewObj = { student, interviewer: newState.interviewers[interviewer] };
 
   return interviewObj;
-
 }

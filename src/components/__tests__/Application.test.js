@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
 
-import { render, cleanup, waitForElement, fireEvent, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText, queryByAltText } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent, getAllByTestId, getByAltText, getByPlaceholderText, queryByText, queryByAltText } from "@testing-library/react";
+
 import { getByText } from "@testing-library/react"
 
 import Application from "components/Application";
@@ -81,8 +82,6 @@ describe("Application", () => {
     
     expect(getByText(day, /2 spots remaining/i)).toBeInTheDocument()
 
-    // debug()
-    // console.log(prettyDOM(appointment))
   });
 
   it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
@@ -123,8 +122,7 @@ describe("Application", () => {
     );
     
     expect(getByText(day, /1 spot remaining/i)).toBeInTheDocument()
-       
-    // debug()
+      
   })
 
   it("shows the save error when failing to save an appointment", async() => {
@@ -149,7 +147,7 @@ describe("Application", () => {
     fireEvent.click(getByText(appointment, "Save"));
 
     expect(getByText(container, "Saving...")).toBeInTheDocument();
-// until here when the error screen will now pop up
+    // until here when the error screen will now pop up
     
     await waitForElement(() => getByText(container, "Could not save appointment."));
     
@@ -157,8 +155,7 @@ describe("Application", () => {
     fireEvent.click(getByAltText(container, "Close"))
     // expect to see the form empty
     expect(getByPlaceholderText(appointment, /enter student name/i)).toHaveValue("")
-    // debug()
-
+  
   });
 
   it("shows the delete error when failing to delete an existing appointment", async () => {

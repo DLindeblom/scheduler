@@ -23,7 +23,7 @@ export default function Form(props) {
     
   };
 
-
+  // Checks to see the input field has text and an interviewer is selected
   const validate = () => {
 
     if (student === '') {
